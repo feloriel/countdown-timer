@@ -1,0 +1,56 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #2f394e;
+  min-height: 100vh;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.flex {
+  display: flex;
+}
+
+.column {
+  flex-direction: column;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.timer {
+  padding: calc(15px + 2vmin) calc(30px + 2vmin);
+  margin: calc(10px + 2vmin);
+  width: 25%;
+}
+
+.timer-number {
+  font-size: calc(50px + 2vmin);
+}
+
+.timer-text {
+  text-transform: uppercase;
+}
+
+.days {
+  background-color: #975dc3;
+}
+
+.hours {
+  background-color: #975dc3;
+}
+
+.minutes {
+  background-color: #975dc3;
+}
+
+.seconds {
+  background-color: #975dc3;
+}
