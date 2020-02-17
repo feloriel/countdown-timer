@@ -13,6 +13,10 @@
   display: flex;
 }
 
+.wrap {
+  flex-wrap: wrap;
+}
+
 .column {
   flex-direction: column;
 }
@@ -25,10 +29,21 @@
   justify-content: center;
 }
 
+.form {
+  padding: calc(15px + 2vmin) calc(30px + 2vmin);
+  background-color: #578af7;
+}
+
+.input {
+  font-family: inherit;
+  font-size: calc(10px + 1.5vmin);
+  color: #2f394e;
+  padding: 10px;
+}
+
 .timer {
   padding: calc(15px + 2vmin) calc(30px + 2vmin);
   margin: calc(10px + 2vmin);
-  width: 25%;
 }
 
 .timer-number {
