@@ -28,9 +28,15 @@ class App extends Component {
   }
   handleSubmit = event => {
     event.preventDefault();
+    this.calcDate();
   }
-  getDate = date => {
-
+  calcDate = () => {
+    const { now, date } = this.state;
+    const milliseconds = date - now;
+    const seconds = milliseconds / 1000;
+    const minutes = milliseconds / (60 * 1000);
+    const hours = milliseconds / (60 * (60 * 1000));
+    console.log(milliseconds, seconds, minutes, hours);
   }
   render() {
     const { name, days, hours, minutes, seconds } = this.state;
