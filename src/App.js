@@ -3,49 +3,66 @@ import './App.css';
 
 class App extends Component {
   state = {
-    countdown: '',
+    name: '',
+    now: null,
     date: null,
     days: 0,
     hours: 0,
     minutes: 0,
     seconds: 0
   }
+  componentDidMount () {
+    this.setState({
+      now: new Date()
+    });
+  }
   handleChange = event => {
     const { name, value } = event.target;
-
+    name === 'date' ?
+    this.setState({
+      [name]: new Date(value)
+    }) :
     this.setState({
       [name]: value
-    });
+    })
   }
   handleSubmit = event => {
     event.preventDefault();
   }
+  getDate = date => {
+
+  }
   render() {
-    const { countdown, days, hours, minutes, seconds } = this.state;
+    const { name, days, hours, minutes, seconds } = this.state;
 
     return (
       <div className="container">
-        <h1>Countdown to {countdown}</h1>
+        <h1>Countdown to {name}</h1>
         <form 
           className="form flex column"
           onSubmit={this.handleSubmit}
         >
-          <label htmlFor="countdown">Event countdown </label>
+          <label htmlFor="name">Event name </label>
           <input 
             type="text"
-            name="countdown"
-            id="countdown"
+            name="name"
+            id="name"
             className="input"
-            value={countdown}
+            value={name}
             onChange={this.handleChange}
           />
-          <label htmlFor="countdown">Date of the next event </label>
+          <label htmlFor="countdown">Event date </label>
           <input 
             type="date"
             name="date"
             id="date"
             className="input"
             onChange={this.handleChange}
+          />
+          <input 
+            type="submit" 
+            value="Start counter"
+            className="input"
           />
         </form>
         <div className="flex wrap justify-center">
