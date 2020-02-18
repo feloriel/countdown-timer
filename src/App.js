@@ -4,17 +4,11 @@ import './App.css';
 class App extends Component {
   state = {
     name: '',
-    now: null,
     date: null,
     days: 0,
     hours: 0,
     minutes: 0,
     seconds: 0
-  }
-  componentDidMount () {
-    this.setState({
-      now: new Date()
-    });
   }
   handleNameChange = event => {
     const { value } = event.target;
@@ -25,7 +19,7 @@ class App extends Component {
   handleDateChange = event => {
     const { value } = event.target;
     this.setState({
-      date: new Date(value)
+      date: new Date(value),
     });
   }
   handleSubmit = event => {
@@ -33,8 +27,8 @@ class App extends Component {
     this.calcDate();
   }
   calcDate = () => {
-    const { now, date } = this.state;
-    const milliseconds = date - now;
+    const { date } = this.state; 
+    const milliseconds = date - new Date();
     const days = parseInt(milliseconds / (24 * (60 * (60 * 1000))));
     const daysBalance = milliseconds % (24 * (60 * (60 * 1000)));
     const hours = parseInt(daysBalance / (60 * (60 * 1000)));
@@ -48,6 +42,15 @@ class App extends Component {
       minutes,
       seconds
     });
+    this.startCounter();
+  }
+  startCounter = () => {
+    const { date } = this.state;
+    if (new Date() < date) {
+      setTimeout(() => {
+        this.calcDate();
+      }, 1000);
+    } 
   }
   render() {
     const { name, days, hours, minutes, seconds } = this.state;
@@ -70,7 +73,7 @@ class App extends Component {
           />
           <label htmlFor="countdown">Event date </label>
           <input 
-            type="date"
+            type="datetime-local"
             name="date"
             id="date"
             className="input"
