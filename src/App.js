@@ -33,10 +33,19 @@ class App extends Component {
   calcDate = () => {
     const { now, date } = this.state;
     const milliseconds = date - now;
-    const seconds = milliseconds / 1000;
-    const minutes = milliseconds / (60 * 1000);
-    const hours = milliseconds / (60 * (60 * 1000));
-    console.log(milliseconds, seconds, minutes, hours);
+    const days = parseInt(milliseconds / (24 * (60 * (60 * 1000))));
+    const daysBalance = milliseconds % (24 * (60 * (60 * 1000)));
+    const hours = parseInt(daysBalance / (60 * (60 * 1000)));
+    const hoursBalance = daysBalance % (60 * (60 * 1000));
+    const minutes = parseInt(hoursBalance / (60 * 1000));
+    const minutesBalance = hoursBalance % (60 * 1000);
+    const seconds = parseInt(minutesBalance / 1000);
+    this.setState({
+      days,
+      hours,
+      minutes,
+      seconds
+    });
   }
   render() {
     const { name, days, hours, minutes, seconds } = this.state;
