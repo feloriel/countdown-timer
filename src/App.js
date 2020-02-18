@@ -16,15 +16,17 @@ class App extends Component {
       now: new Date()
     });
   }
-  handleChange = event => {
-    const { name, value } = event.target;
-    name === 'date' ?
+  handleNameChange = event => {
+    const { value } = event.target;
     this.setState({
-      [name]: new Date(value)
-    }) :
+      name: value
+    });
+  }
+  handleDateChange = event => {
+    const { value } = event.target;
     this.setState({
-      [name]: value
-    })
+      date: new Date(value)
+    });
   }
   handleSubmit = event => {
     event.preventDefault();
@@ -64,7 +66,7 @@ class App extends Component {
             id="name"
             className="input"
             value={name}
-            onChange={this.handleChange}
+            onChange={this.handleNameChange}
           />
           <label htmlFor="countdown">Event date </label>
           <input 
@@ -72,7 +74,7 @@ class App extends Component {
             name="date"
             id="date"
             className="input"
-            onChange={this.handleChange}
+            onChange={this.handleDateChange}
           />
           <input 
             type="submit" 
