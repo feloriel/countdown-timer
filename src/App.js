@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Form from './components/Form';
+import CountdownTimer from './components/CountdownTimer';
 import './App.css';
 
 class App extends Component {
@@ -8,7 +10,8 @@ class App extends Component {
     days: 0,
     hours: 0,
     minutes: 0,
-    seconds: 0
+    seconds: 0,
+    isSubmitted: false
   }
   handleNameChange = event => {
     const { value } = event.target;
@@ -24,6 +27,7 @@ class App extends Component {
   }
   handleSubmit = event => {
     event.preventDefault();
+    this.setState({ isSubmitted: true });
     this.calcDate();
   }
   calcDate = () => {
@@ -53,56 +57,27 @@ class App extends Component {
     } 
   }
   render() {
-    const { name, days, hours, minutes, seconds } = this.state;
+    const { name, days, hours, minutes, seconds, isSubmitted } = this.state;
 
     return (
       <div className="container">
-        <h1>Countdown to {name}</h1>
-        <form 
-          className="form flex column"
-          onSubmit={this.handleSubmit}
-        >
-          <label htmlFor="name">Event name </label>
-          <input 
-            type="text"
-            name="name"
-            id="name"
-            className="input"
-            value={name}
-            onChange={this.handleNameChange}
+        <h1>Countdown timer</h1>
+        {isSubmitted === false ? 
+          <Form
+            name={name}
+            handleSubmit={this.handleSubmit}
+            handleNameChange={this.handleNameChange}
+            handleDateChange={this.handleDateChange}
           />
-          <label htmlFor="countdown">Event date </label>
-          <input 
-            type="datetime-local"
-            name="date"
-            id="date"
-            className="input"
-            onChange={this.handleDateChange}
+        :
+          <CountdownTimer
+            name={name}
+            days={days}
+            hours={hours}
+            minutes={minutes}
+            seconds={seconds}
           />
-          <input 
-            type="submit" 
-            value="Start counter"
-            className="input"
-          />
-        </form>
-        <div className="flex wrap justify-center">
-          <div className="days timer flex column align-center">
-            <div className="timer-number">{days}</div>
-            <div className="timer-text">Days</div>
-          </div>
-          <div className="hours timer flex column align-center">
-            <div className="timer-number">{hours}</div>
-            <div className="timer-text">Hours</div>
-          </div>
-          <div className="minutes timer flex column align-center">
-            <div className="timer-number">{minutes}</div>
-            <div className="timer-text">Minutes</div>
-          </div>
-          <div className="seconds timer flex column align-center">
-            <div className="timer-number">{seconds}</div>
-            <div className="timer-text">Seconds</div>
-          </div>
-        </div>
+        }
       </div>
     );
   }
